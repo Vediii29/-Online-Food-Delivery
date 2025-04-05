@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Food Delivery</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>🍕 Online Food Delivery</h1>
+        <nav>
+          <a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
+          <a id="auth-link" href="logic.html">👤 Login</a>
+      </nav>
+      
+    </header>
+
+    <section id="menu">
+        <h2>Our Menu</h2>
+        <div class="category-buttons">
+            <button onclick="filterMenu('all')" >All</button>
+            <button onclick="filterMenu('pizza')">Pizza</button>
+            <button onclick="filterMenu('burger')">Burger</button>
+            <button onclick="filterMenu('drinks')">Drinks</button>
+            <button onclick="filterMenu('dessert')">Desserts</button>
+            <button onclick="filterMenu('indian')">Indian Dishes</button>
+        </div>
+
+        <div class="menu-container">
+            <!-- PIZZA -->
+            <div class="menu-item" data-category="pizza">
+                <img src="Pepperoni Pizza.jpg" alt="Pizza">
+                <h3>Margherita Pizza</h3>
+                <p>₹250</p>
+                <button onclick="addToCart('Margherita Pizza', 250)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="pizza">
+                <img src="Margherita Pizza.jpg" alt="Pizza">
+                <h3>Pepperoni Pizza</h3>
+                <p>₹300</p>
+                <button onclick="addToCart('Pepperoni Pizza', 300)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="pizza">
+                <img src="BBQ Chicken .jpg" alt="Pizza">
+                <h3>BBQ Chicken Pizza</h3>
+                <p>₹320</p>
+                <button onclick="addToCart('BBQ Chicken Pizza', 320)">Add to Cart</button>
+            </div>
+
+            <!-- BURGERS -->
+            <div class="menu-item" data-category="burger">
+                <img src="Veggie.jpg" alt="Burger">
+                <h3>Cheese Burger</h3>
+                <p>₹150</p>
+                <button onclick="addToCart('Cheese Burger', 150)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="burger">
+                <img src="Cheese Burger.jpg" alt="Burger">
+                <h3>Chicken Burger</h3>
+                <p>₹180</p>
+                <button onclick="addToCart('Chicken Burger', 180)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="burger">
+                <img src="Chicken.jpg" alt="Burger">
+                <h3>Veggie Burger</h3>
+                <p>₹130</p>
+                <button onclick="addToCart('Veggie Burger', 130)">Add to Cart</button>
+            </div>
+
+            <!-- DRINKS -->
+            <div class="menu-item" data-category="drinks">
+                <img src="Cold Coffee.jpg" alt="Cold Coffee">
+                <h3>Cold Coffee</h3>
+                <p>₹120</p>
+                <button onclick="addToCart('Cold Coffee', 120)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="drinks">
+                <img src="Mango Smoothie.jpg" alt="Mango Smoothie">
+                <h3>Mango Smoothie</h3>
+                <p>₹140</p>
+                <button onclick="addToCart('Mango Smoothie', 140)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="drinks">
+                <img src="Soft Drink.jpg" alt="Soft Drink">
+                <h3>Soft Drink</h3>
+                <p>₹50</p>
+                <button onclick="addToCart('Soft Drink', 50)">Add to Cart</button>
+            </div>
+
+            <!-- DESSERTS -->
+            <div class="menu-item" data-category="dessert">
+                <img src="Chocolate Ice Cream.jpg" alt="Chocolate Ice Cream">
+                <h3>Chocolate Ice Cream</h3>
+                <p>₹100</p>
+                <button onclick="addToCart('Chocolate Ice Cream', 100)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="dessert">
+                <img src="Blueberry Cheesecake.jpg" alt="Cheesecake">
+                <h3>Blueberry Cheesecake</h3>
+                <p>₹180</p>
+                <button onclick="addToCart('Blueberry Cheesecake', 180)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="dessert">
+                <img src="images.jpeg" alt="Brownie">
+                <h3>Brownie with Ice Cream</h3>
+                <p>₹200</p>
+                <button onclick="addToCart('Brownie with Ice Cream', 200)">Add to Cart</button>
+            </div>
+
+            <!-- INDIAN DISHES -->
+            <div class="menu-item" data-category="indian">
+                <img src="Paneer Butter Masala.jpg" alt="Paneer Butter Masala">
+                <h3>Paneer Butter Masala</h3>
+                <p>₹250</p>
+                <button onclick="addToCart('Paneer Butter Masala', 250)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="indian">
+                <img src="Chicken Biryani.jpg" alt="Chicken Biryani">
+                <h3>Chicken Biryani</h3>
+                <p>₹350</p>
+                <button onclick="addToCart('Chicken Biryani', 350)">Add to Cart</button>
+            </div>
+            <div class="menu-item" data-category="indian">
+                <img src="Dosa.jpeg" alt="Masala Dosa">
+                <h3>Masala Dosa</h3>
+                <p>₹180</p>
+                <button onclick="addToCart('Masala Dosa', 180)">Add to Cart</button>
+            </div>
+
+        </div>
+    </section>
+    
+    <script>
+               
+    let cart = JSON.parse(localStorage.getItem('cart')) || []; 
+
+
+function addToCart(itemName, price) {
+
+    const item = {
+        name: itemName,
+        price: price
+    };
+
+
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(itemName + " added to the cart!");
+    updateCartCount();
+    console.log(cart);
+}
+
+
+function updateCartCount() {
+    const cartCount = document.getElementById('cart-count');
+    cartCount.textContent = cart.length;  
+}
+window.onload = function() {
+    updateCartCount();
+}   </script>
+
+    
+
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
